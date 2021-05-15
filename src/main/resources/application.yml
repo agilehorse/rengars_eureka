@@ -1,0 +1,33 @@
+spring:
+  freemarker:
+    template-loader-path: classpath:/templates/
+    prefer-file-system-access: false
+
+server:
+  port: 8761
+
+eureka:
+  environment: dev
+  instance:
+    hostname: localhost
+    appName: eureka-server
+    lease-renewal-interval-in-seconds: 30
+  client:
+    registerWithEureka: false
+    fetchRegistry: false
+    serviceUrl:
+      defaultZone: http://${eureka.instance.hostname}:${server.port}/eureka/
+  dashboard:
+    enabled: true
+    path: /
+
+# spring.cloud.loadbalancer.ribbon.enabled: false
+
+management:
+  endpoint:
+    heapdump:
+      enabled: true
+  endpoints:
+    web:
+      exposure:
+        include: health, info, env, heapdump, metrics
